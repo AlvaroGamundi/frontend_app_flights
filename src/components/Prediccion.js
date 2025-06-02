@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-export default function Prediccion({ onLogout }) {
-  const [texto, setTexto] = useState('');
-  const [resultado, setResultado] = useState(null);
+export default function Prediction({ onLogout }) {
+  const [text, setText] = useState('');
+  const [result, setResult] = useState(null);
   const [error, setError] = useState('');
 
-  const handlePredecir = async () => {
+  const handlePredict = async () => {
     setError('');
-    setResultado(null);
+    setResult(null);
     const token = localStorage.getItem('token');
     if (!token) {
-      setError('No estás autenticado');
+      setError('You are not authenticated');
       return;
     }
     try {
@@ -20,34 +20,37 @@ export default function Prediccion({ onLogout }) {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ texto }),
+        body: JSON.stringify({ texto: text }), // Keep 'texto' if backend expects it in Spanish
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.detail || 'Error al predecir');
+        setError(data.detail || 'Prediction error');
       } else {
-        setResultado(data.sentimiento);
+        setResult(data.sentimiento); // Same here, 'sentimiento' if backend responds in Spanish
       }
     } catch (err) {
-      setError('Error en conexión con el servidor');
+      setError('Server connection error');
     }
   };
 
   return (
     <div>
-      <h2>Predicción de Sentimiento</h2>
+      <h2>Sentiment Prediction</h2>
       <textarea
         rows="4"
         cols="50"
-        placeholder="Escribe el texto aquí"
-        value={texto}
-        onChange={e => setTexto(e.target.value)}
+        placeholder="Write your text here"
+        value={text}
+        onChange={e => setText(e.target.value)}
       />
       <br />
-      <button onClick={handlePredecir}>Predecir</button>
-      <button onClick={() => { localStorage.removeItem('token'); onLogout(); }}>Cerrar sesión</button>
-      {resultado && <p>Sentimiento: {resultado}</p>}
-      {error && <p style={{color:'red'}}>{error}</p>}
+      <button onClick={handlePredict}>Predict</button>
+      <button onClick={() => { localStorage.removeItem('token'); onLogout(); }}>
+        Log Out
+      </button>
+      {result && <p>Sentiment: {result}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }
+

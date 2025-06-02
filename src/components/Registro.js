@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-export default function Registro({ onRegistroExitoso }) {
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
+export default function Register({ onRegisterSuccess }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [contraseña, setContraseña] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
@@ -14,32 +14,60 @@ export default function Registro({ onRegistroExitoso }) {
       const res = await fetch('https://hbgxfeir9g.eu-west-1.awsapprunner.com/registro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, apellido, email, contraseña }),
+        body: JSON.stringify({
+          nombre: firstName,
+          apellido: lastName,
+          email,
+          contraseña: password,
+        }),
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || 'Error en registro');
+        setError(data.error || 'Registration error');
       } else {
-        alert('Registro exitoso, ahora inicia sesión.');
-        onRegistroExitoso();
+        alert('Registration successful, please log in.');
+        onRegisterSuccess();
       }
     } catch (err) {
-      setError('Error en conexión con el servidor');
+      setError('Server connection error');
     }
   };
 
   return (
     <div>
-      <h2>Registro</h2>
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input placeholder="Nombre" value={nombre} onChange={e => setNombre(e.target.value)} required />
-        <input placeholder="Apellido" value={apellido} onChange={e => setApellido(e.target.value)} required />
-        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Contraseña" value={contraseña} onChange={e => setContraseña(e.target.value)} required />
-        <button type="submit">Registrarse</button>
+        <input
+          placeholder="First Name"
+          value={firstName}
+          onChange={e => setFirstName(e.target.value)}
+          required
+        />
+        <input
+          placeholder="Last Name"
+          value={lastName}
+          onChange={e => setLastName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Sign Up</button>
       </form>
-      {error && <p style={{color:'red'}}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }
+
 
