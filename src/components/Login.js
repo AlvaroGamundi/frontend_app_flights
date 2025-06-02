@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-export default function Login({ onLoginExitoso, irRegistro }) {
+export default function Login({ onLoginSuccess, goToRegister }) {
   const [email, setEmail] = useState('');
-  const [contraseña, setContraseña] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
@@ -10,7 +10,7 @@ export default function Login({ onLoginExitoso, irRegistro }) {
     setError('');
     const formData = new URLSearchParams();
     formData.append('username', email);
-    formData.append('password', contraseña);
+    formData.append('password', password);
 
     try {
       const res = await fetch('https://hbgxfeir9g.eu-west-1.awsapprunner.com/login', {
@@ -20,13 +20,13 @@ export default function Login({ onLoginExitoso, irRegistro }) {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.detail || 'Error en login');
+        setError(data.detail || 'Login error');
       } else {
         localStorage.setItem('token', data.access_token);
-        onLoginExitoso();
+        onLoginSuccess();
       }
     } catch (err) {
-      setError('Error en conexión con el servidor');
+      setError('Server connection error');
     }
   };
 
@@ -34,15 +34,28 @@ export default function Login({ onLoginExitoso, irRegistro }) {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Contraseña" value={contraseña} onChange={e => setContraseña(e.target.value)} required />
-        <button type="submit">Ingresar</button>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Log In</button>
       </form>
       <p>
-        ¿No tienes cuenta? <button onClick={irRegistro}>Regístrate aquí</button>
+        Don’t have an account? <button onClick={goToRegister}>Register here</button>
       </p>
-      {error && <p style={{color:'red'}}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }
+
 
