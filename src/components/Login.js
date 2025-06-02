@@ -51,7 +51,7 @@ export default function Login({ onLoginSuccess, goToRegister }) {
         <button type="submit">Log In</button>
       </form>
       <p>
-        Don’t have an account1? <button onClick={goToRegister}>Register here</button>
+        Don’t have an account? <button onClick={goToRegister}>Register here</button>
       </p>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
