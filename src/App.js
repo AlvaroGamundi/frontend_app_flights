@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Register from './components/Register';
+import Register from './components/Registro';
 import Login from './components/Login';
-import Prediction from './components/Prediction';
+import Prediction from './components/Prediccion';
 
 function App() {
   const [page, setPage] = useState('login'); // 'login' | 'register' | 'prediction'
