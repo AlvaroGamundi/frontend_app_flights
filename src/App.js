@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
-import Registro from './components/Registro';
+import Register from './components/Register';
 import Login from './components/Login';
-import Prediccion from './components/Prediccion';
+import Prediction from './components/Prediction';
 
 function App() {
-  const [pagina, setPagina] = useState('login'); // 'login' | 'registro' | 'prediccion'
-  const [logeado, setLogeado] = useState(!!localStorage.getItem('token'));
+  const [page, setPage] = useState('login'); // 'login' | 'register' | 'prediction'
+  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('token'));
 
-  const irRegistro = () => setPagina('registro');
-  const irLogin = () => setPagina('login');
-  const onLoginExitoso = () => {
-    setLogeado(true);
-    setPagina('prediccion');
+  const goToRegister = () => setPage('register');
+  const goToLogin = () => setPage('login');
+  const onLoginSuccess = () => {
+    setLoggedIn(true);
+    setPage('prediction');
   };
   const onLogout = () => {
-    setLogeado(false);
-    setPagina('login');
+    setLoggedIn(false);
+    setPage('login');
   };
 
   return (
     <div className="App">
-      {logeado ? (
-        <Prediccion onLogout={onLogout} />
-      ) : pagina === 'login' ? (
-        <Login onLoginExitoso={onLoginExitoso} irRegistro={irRegistro} />
+      {loggedIn ? (
+        <Prediction onLogout={onLogout} />
+      ) : page === 'login' ? (
+        <Login onLoginSuccess={onLoginSuccess} goToRegister={goToRegister} />
       ) : (
-        <Registro onRegistroExitoso={irLogin} />
+        <Register onRegisterSuccess={goToLogin} />
       )}
     </div>
   );
 }
 
 export default App;
+
 
