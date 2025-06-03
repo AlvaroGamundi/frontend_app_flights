@@ -13,7 +13,7 @@ export default function Login({ onLoginSuccess, goToRegister }) {
     formData.append('password', password);
 
     try {
-      const res = await fetch('https://hbgxfeir9g.eu-west-1.awsapprunner.com/login', {
+      const res = await fetch('https://wpftas3q8t.eu-west-1.awsapprunner.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString(),
@@ -51,7 +51,7 @@ export default function Login({ onLoginSuccess, goToRegister }) {
         <button type="submit">Log In</button>
       </form>
       <p>
-        Don’t have an account,prueba1? <button onClick={goToRegister}>Register here</button>
+        Don’t have an account,prueba2? <button onClick={goToRegister}>Register here</button>
       </p>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>

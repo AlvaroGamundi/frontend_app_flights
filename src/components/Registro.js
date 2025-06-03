@@ -11,7 +11,7 @@ export default function Register({ onRegisterSuccess }) {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch('https://hbgxfeir9g.eu-west-1.awsapprunner.com/registro', {
+      const res = await fetch('https://wpftas3q8t.eu-west-1.awsapprunner.com/registro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

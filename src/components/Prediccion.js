@@ -14,7 +14,7 @@ export default function Prediction({ onLogout }) {
       return;
     }
     try {
-      const res = await fetch('https://hbgxfeir9g.eu-west-1.awsapprunner.com/predecir', {
+      const res = await fetch('https://wpftas3q8t.eu-west-1.awsapprunner.com/predecir', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
