@@ -26,7 +26,7 @@ export default function Prediction({ onLogout }) {
       if (!res.ok) {
         setError(data.detail || 'Prediction error');
       } else {
-        setResult(data.sentimiento); // Same here, 'sentimiento' if backend responds in Spanish
+        setResult(`Sentiment: ${data.sentimiento} (User: ${data.usuario})`); // Same here, 'sentimiento' if backend responds in Spanish
       }
     } catch (err) {
       setError('Server connection error');
