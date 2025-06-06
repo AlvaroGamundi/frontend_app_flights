@@ -47,4 +47,25 @@
   50% { border-color: white; }
 }
 
+/* 👇 Responsive: ajustar para móvil */
+@media (max-width: 600px) {
+  .typewriter {
+    font-size: 1rem;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow: visible;
+    animation: none;
+    border-right: none;
+    text-align: center;
+  }
 
+  .typewriter-container {
+    max-width: 95%;
+    padding: 12px;
+  }
+
+  .hero-banner {
+    height: auto;
+    padding: 20px 10px;
+  }
+}
