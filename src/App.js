@@ -23,10 +23,12 @@ function App() {
     <div className="App">
       <div className="hero-banner">
         {!loggedIn && (
-          <h1 className="typewriter">
-            Welcome to the Flight Sentiment App. Log in or sign up to leave a comment
-            about your last flight. We'll give you feedback based on your experience.
-          </h1>
+          <div className="typewriter-container">
+            <h1 className="typewriter">Welcome to the Flight Sentiment App.</h1>
+            <h2 className="typewriter delay">
+              Log in or sign up to leave a comment about your flight.
+            </h2>
+          </div>
         )}
       </div>
 

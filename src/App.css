@@ -1,38 +1,40 @@
-.App {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: sans-serif;
-  box-sizing: border-box;
-  text-align: center;
-}
-
 .hero-banner {
   background-image: url('./assets/banner.png');
   background-size: cover;
   background-position: center;
-  height: 220px;
+  height: 300px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
   border-radius: 8px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.typewriter-container {
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  display: inline-block;
 }
 
 .typewriter {
   color: white;
   font-size: 1.4rem;
   font-weight: bold;
-  width: 80%;
-  text-align: center;
   font-family: monospace;
   white-space: nowrap;
   overflow: hidden;
   border-right: 4px solid white;
-  animation: typing 6s steps(100, end), blink 0.75s step-end infinite;
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 10px;
-  border-radius: 8px;
+  animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+}
+
+.typewriter.delay {
+  animation-delay: 3.5s;
+  animation-duration: 4s;
 }
 
 @keyframes typing {
@@ -44,3 +46,5 @@
   0%, 100% { border-color: transparent; }
   50% { border-color: white; }
 }
+
+
