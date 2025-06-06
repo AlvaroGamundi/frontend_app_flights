@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Register from './components/Registro';
 import Login from './components/Login';
 import Prediction from './components/Prediccion';
-import logo from './assets/logo.png'; // ruta de tu imagen
+import banner from './assets/banner.png'; // usa la tuya aquí
+import './App.css';
 
 function App() {
   const [page, setPage] = useState('login');
@@ -21,8 +22,14 @@ function App() {
 
   return (
     <div className="App">
-      {/* Imagen común en todas las vistas */}
-      <img src={logo} alt="Mi logo" style={{ width: '200px', margin: '20px auto', display: 'block' }} />
+      <img src={banner} alt="Banner" className="banner-image" />
+
+      {!loggedIn && (
+        <h1 className="typewriter">
+          Welcome to the Flight Sentiment App. Log in or sign up to leave a comment
+          about your last flight. We'll give you feedback based on your experience.
+        </h1>
+      )}
 
       {loggedIn ? (
         <Prediction onLogout={onLogout} />
@@ -36,6 +43,4 @@ function App() {
 }
 
 export default App;
-
-
 
